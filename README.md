@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SPO — востребованность IT-вакансий
 
-## Getting Started
+MVP фронтенда: вход и дашборд с динамикой новых вакансий React/Java по дням, неделям, месяцам и годам. Пока работает на моках, бэкенд не нужен.
 
-First, run the development server:
+Стек: Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui (Base UI) · TanStack Query · Recharts. Пакетный менеджер и раннер — **bun**.
+
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Демо-доступ: `demo@spo.dev` / `demo1234`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Другие команды: `bun run build`, `bun run lint`, `bun run typecheck`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Структура
 
-## Learn More
+```
+src/
+  app/
+    api/            mock-бэкенд (Route Handlers): auth, vacancies
+    login/          страница входа
+    dashboard/      защищённый раздел
+    providers.tsx   React Query, тема, тосты, редирект на 401
+  features/
+    auth/           API-хуки, форма входа, меню пользователя
+    demand/         фильтры, KPI, график, таблица последних вакансий
+  mocks/            генератор «распарсенных» вакансий и агрегация
+  shared/           типы, конфиг (направления, периоды), http-клиент, даты
+  components/ui/    компоненты shadcn
+  proxy.ts          редирект неавторизованных с /dashboard на /login
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Mock API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Метод | Путь | Описание |
+| --- | --- | --- |
+| POST | `/api/auth/login` | `{ email, password }` → пользователь + httpOnly cookie `spo_session` |
+| POST | `/api/auth/logout` | удаляет cookie |
+| GET | `/api/auth/me` | текущий пользователь или 401 |
+| GET | `/api/vacancies/demand?period=day\|week\|month\|year&directions=react,java` | временной ряд + сводка |
+| GET | `/api/vacancies?directions=react,java&limit=20` | последние вакансии |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Данные генерируются детерминированно (seed) на 3 года назад от текущей даты.
 
-## Deploy on Vercel
+## Переход на настоящий бэкенд
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Реализовать те же контракты (типы в `src/shared/types.ts`).
+2. Указать `NEXT_PUBLIC_API_URL` (см. `.env.example`). Запросы идут с `credentials: "include"`.
+3. Если бэкенд ставит cookie с другим именем — поменять `SESSION_COOKIE` в `src/shared/config.ts` (его проверяет `proxy.ts`).
+4. Удалить `src/app/api` и `src/mocks`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Новые направления добавляются в `DIRECTIONS` в `src/shared/config.ts` (и в `DirectionId`).
