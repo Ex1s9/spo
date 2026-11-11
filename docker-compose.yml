@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: spo
+      POSTGRES_USER: spo
+      POSTGRES_PASSWORD: spo
+    ports:
+      - "5434:5432"
+    volumes:
+      - spo-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U spo -d spo"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  spo-pg:

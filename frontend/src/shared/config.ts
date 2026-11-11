@@ -1,8 +1,8 @@
-import type { DirectionId, Period } from "./types"
+import type { DirectionId, Grade, Period } from "./types"
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "/api"
 
-export const SESSION_COOKIE = "spo_session"
+export const SESSION_COOKIE = "spo_refresh"
 
 export type DirectionMeta = {
   id: DirectionId
@@ -45,4 +45,17 @@ export function isPeriod(value: unknown): value is Period {
 
 export function isDirectionId(value: unknown): value is DirectionId {
   return DIRECTION_IDS.includes(value as DirectionId)
+}
+
+export const GRADES: { id: Grade; label: string }[] = [
+  { id: "junior", label: "Junior" },
+  { id: "middle", label: "Middle" },
+  { id: "senior", label: "Senior" },
+  { id: "lead", label: "Lead" },
+]
+
+export const GRADE_IDS = GRADES.map((g) => g.id)
+
+export function isGrade(value: unknown): value is Grade {
+  return GRADE_IDS.includes(value as Grade)
 }

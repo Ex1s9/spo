@@ -1,0 +1,1116 @@
+{
+  "senior": {
+    "period": "month",
+    "directions": [
+      "java"
+    ],
+    "grades": [
+      "senior"
+    ],
+    "skills": [
+      {
+        "id": "testing",
+        "label": "Тестирование"
+      },
+      {
+        "id": "git",
+        "label": "Git"
+      },
+      {
+        "id": "java",
+        "label": "Java"
+      },
+      {
+        "id": "spring",
+        "label": "Spring Boot"
+      },
+      {
+        "id": "sql",
+        "label": "SQL"
+      },
+      {
+        "id": "postgresql",
+        "label": "PostgreSQL"
+      },
+      {
+        "id": "kafka",
+        "label": "Kafka"
+      },
+      {
+        "id": "docker",
+        "label": "Docker"
+      },
+      {
+        "id": "kubernetes",
+        "label": "Kubernetes (k8s)"
+      },
+      {
+        "id": "cicd",
+        "label": "CI/CD"
+      },
+      {
+        "id": "architecture",
+        "label": "Проектирование систем"
+      }
+    ],
+    "buckets": [
+      {
+        "start": "2025-12-01T00:00:00.000Z",
+        "total": 71,
+        "counts": {
+          "testing": 46,
+          "git": 68,
+          "java": 71,
+          "spring": 61,
+          "sql": 61,
+          "postgresql": 38,
+          "kafka": 38,
+          "docker": 48,
+          "kubernetes": 40,
+          "cicd": 45,
+          "architecture": 57
+        }
+      },
+      {
+        "start": "2026-01-01T00:00:00.000Z",
+        "total": 84,
+        "counts": {
+          "testing": 41,
+          "git": 74,
+          "java": 84,
+          "spring": 71,
+          "sql": 69,
+          "postgresql": 51,
+          "kafka": 49,
+          "docker": 54,
+          "kubernetes": 40,
+          "cicd": 55,
+          "architecture": 73
+        }
+      },
+      {
+        "start": "2026-02-01T00:00:00.000Z",
+        "total": 78,
+        "counts": {
+          "testing": 46,
+          "git": 72,
+          "java": 78,
+          "spring": 63,
+          "sql": 62,
+          "postgresql": 51,
+          "kafka": 37,
+          "docker": 55,
+          "kubernetes": 50,
+          "cicd": 49,
+          "architecture": 65
+        }
+      },
+      {
+        "start": "2026-03-01T00:00:00.000Z",
+        "total": 86,
+        "counts": {
+          "testing": 58,
+          "git": 81,
+          "java": 86,
+          "spring": 71,
+          "sql": 68,
+          "postgresql": 59,
+          "kafka": 48,
+          "docker": 56,
+          "kubernetes": 46,
+          "cicd": 52,
+          "architecture": 76
+        }
+      },
+      {
+        "start": "2026-04-01T00:00:00.000Z",
+        "total": 82,
+        "counts": {
+          "testing": 63,
+          "git": 77,
+          "java": 82,
+          "spring": 68,
+          "sql": 65,
+          "postgresql": 51,
+          "kafka": 53,
+          "docker": 60,
+          "kubernetes": 58,
+          "cicd": 55,
+          "architecture": 71
+        }
+      },
+      {
+        "start": "2026-05-01T00:00:00.000Z",
+        "total": 104,
+        "counts": {
+          "testing": 74,
+          "git": 99,
+          "java": 104,
+          "spring": 86,
+          "sql": 87,
+          "postgresql": 75,
+          "kafka": 63,
+          "docker": 78,
+          "kubernetes": 48,
+          "cicd": 72,
+          "architecture": 93
+        }
+      },
+      {
+        "start": "2026-06-01T00:00:00.000Z",
+        "total": 102,
+        "counts": {
+          "testing": 74,
+          "git": 97,
+          "java": 102,
+          "spring": 89,
+          "sql": 84,
+          "postgresql": 68,
+          "kafka": 57,
+          "docker": 77,
+          "kubernetes": 58,
+          "cicd": 69,
+          "architecture": 91
+        }
+      },
+      {
+        "start": "2026-07-01T00:00:00.000Z",
+        "total": 93,
+        "counts": {
+          "testing": 71,
+          "git": 87,
+          "java": 93,
+          "spring": 83,
+          "sql": 81,
+          "postgresql": 53,
+          "kafka": 59,
+          "docker": 71,
+          "kubernetes": 63,
+          "cicd": 65,
+          "architecture": 80
+        }
+      },
+      {
+        "start": "2026-08-01T00:00:00.000Z",
+        "total": 91,
+        "counts": {
+          "testing": 73,
+          "git": 86,
+          "java": 91,
+          "spring": 79,
+          "sql": 80,
+          "postgresql": 59,
+          "kafka": 59,
+          "docker": 57,
+          "kubernetes": 62,
+          "cicd": 58,
+          "architecture": 83
+        }
+      },
+      {
+        "start": "2026-09-01T00:00:00.000Z",
+        "total": 114,
+        "counts": {
+          "testing": 85,
+          "git": 109,
+          "java": 114,
+          "spring": 101,
+          "sql": 101,
+          "postgresql": 79,
+          "kafka": 74,
+          "docker": 93,
+          "kubernetes": 78,
+          "cicd": 74,
+          "architecture": 103
+        }
+      },
+      {
+        "start": "2026-10-01T00:00:00.000Z",
+        "total": 123,
+        "counts": {
+          "testing": 96,
+          "git": 117,
+          "java": 123,
+          "spring": 113,
+          "sql": 107,
+          "postgresql": 86,
+          "kafka": 80,
+          "docker": 101,
+          "kubernetes": 91,
+          "cicd": 100,
+          "architecture": 111
+        }
+      },
+      {
+        "start": "2026-11-01T00:00:00.000Z",
+        "total": 17,
+        "counts": {
+          "testing": 13,
+          "git": 17,
+          "java": 17,
+          "spring": 12,
+          "sql": 16,
+          "postgresql": 8,
+          "kafka": 11,
+          "docker": 11,
+          "kubernetes": 12,
+          "cicd": 13,
+          "architecture": 14
+        }
+      }
+    ],
+    "summary": [
+      {
+        "skill": "testing",
+        "total": 740,
+        "lastComplete": 96,
+        "previous": 85,
+        "lastCompleteShare": 78.04878048780488,
+        "previousShare": 74.56140350877193,
+        "changePp": 3.4873769790329447
+      },
+      {
+        "skill": "git",
+        "total": 984,
+        "lastComplete": 117,
+        "previous": 109,
+        "lastCompleteShare": 95.1219512195122,
+        "previousShare": 95.6140350877193,
+        "changePp": -0.4920838682071036
+      },
+      {
+        "skill": "java",
+        "total": 1045,
+        "lastComplete": 123,
+        "previous": 114,
+        "lastCompleteShare": 100,
+        "previousShare": 100,
+        "changePp": 0
+      },
+      {
+        "skill": "spring",
+        "total": 897,
+        "lastComplete": 113,
+        "previous": 101,
+        "lastCompleteShare": 91.869918699187,
+        "previousShare": 88.59649122807018,
+        "changePp": 3.2734274711168183
+      },
+      {
+        "skill": "sql",
+        "total": 881,
+        "lastComplete": 107,
+        "previous": 101,
+        "lastCompleteShare": 86.99186991869918,
+        "previousShare": 88.59649122807018,
+        "changePp": -1.604621309370998
+      },
+      {
+        "skill": "postgresql",
+        "total": 678,
+        "lastComplete": 86,
+        "previous": 79,
+        "lastCompleteShare": 69.91869918699187,
+        "previousShare": 69.2982456140351,
+        "changePp": 0.6204535729567766
+      },
+      {
+        "skill": "kafka",
+        "total": 628,
+        "lastComplete": 80,
+        "previous": 74,
+        "lastCompleteShare": 65.04065040650406,
+        "previousShare": 64.91228070175438,
+        "changePp": 0.12836970474967302
+      },
+      {
+        "skill": "docker",
+        "total": 761,
+        "lastComplete": 101,
+        "previous": 93,
+        "lastCompleteShare": 82.11382113821138,
+        "previousShare": 81.57894736842105,
+        "changePp": 0.5348737697903232
+      },
+      {
+        "skill": "kubernetes",
+        "total": 646,
+        "lastComplete": 91,
+        "previous": 78,
+        "lastCompleteShare": 73.98373983739837,
+        "previousShare": 68.42105263157895,
+        "changePp": 5.562687205819429
+      },
+      {
+        "skill": "cicd",
+        "total": 707,
+        "lastComplete": 100,
+        "previous": 74,
+        "lastCompleteShare": 81.30081300813008,
+        "previousShare": 64.91228070175438,
+        "changePp": 16.388532306375694
+      },
+      {
+        "skill": "architecture",
+        "total": 917,
+        "lastComplete": 111,
+        "previous": 103,
+        "lastCompleteShare": 90.2439024390244,
+        "previousShare": 90.35087719298247,
+        "changePp": -0.10697475395807032
+      }
+    ],
+    "generatedAt": "2026-11-05T12:00:00.000Z"
+  },
+  "middle": {
+    "period": "month",
+    "directions": [
+      "java"
+    ],
+    "grades": [
+      "middle"
+    ],
+    "skills": [
+      {
+        "id": "testing",
+        "label": "Тестирование"
+      },
+      {
+        "id": "git",
+        "label": "Git"
+      },
+      {
+        "id": "java",
+        "label": "Java"
+      },
+      {
+        "id": "spring",
+        "label": "Spring Boot"
+      },
+      {
+        "id": "sql",
+        "label": "SQL"
+      },
+      {
+        "id": "postgresql",
+        "label": "PostgreSQL"
+      },
+      {
+        "id": "kafka",
+        "label": "Kafka"
+      },
+      {
+        "id": "docker",
+        "label": "Docker"
+      },
+      {
+        "id": "kubernetes",
+        "label": "Kubernetes (k8s)"
+      },
+      {
+        "id": "cicd",
+        "label": "CI/CD"
+      },
+      {
+        "id": "architecture",
+        "label": "Проектирование систем"
+      }
+    ],
+    "buckets": [
+      {
+        "start": "2025-12-01T00:00:00.000Z",
+        "total": 225,
+        "counts": {
+          "testing": 145,
+          "git": 213,
+          "java": 225,
+          "spring": 190,
+          "sql": 189,
+          "postgresql": 127,
+          "kafka": 109,
+          "docker": 148,
+          "kubernetes": 0,
+          "cicd": 137,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-01-01T00:00:00.000Z",
+        "total": 220,
+        "counts": {
+          "testing": 145,
+          "git": 206,
+          "java": 220,
+          "spring": 184,
+          "sql": 183,
+          "postgresql": 126,
+          "kafka": 121,
+          "docker": 139,
+          "kubernetes": 0,
+          "cicd": 140,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-02-01T00:00:00.000Z",
+        "total": 248,
+        "counts": {
+          "testing": 156,
+          "git": 236,
+          "java": 248,
+          "spring": 208,
+          "sql": 211,
+          "postgresql": 145,
+          "kafka": 137,
+          "docker": 158,
+          "kubernetes": 0,
+          "cicd": 170,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-03-01T00:00:00.000Z",
+        "total": 281,
+        "counts": {
+          "testing": 185,
+          "git": 260,
+          "java": 281,
+          "spring": 243,
+          "sql": 237,
+          "postgresql": 170,
+          "kafka": 161,
+          "docker": 200,
+          "kubernetes": 0,
+          "cicd": 190,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-04-01T00:00:00.000Z",
+        "total": 292,
+        "counts": {
+          "testing": 196,
+          "git": 279,
+          "java": 292,
+          "spring": 241,
+          "sql": 251,
+          "postgresql": 179,
+          "kafka": 169,
+          "docker": 211,
+          "kubernetes": 0,
+          "cicd": 195,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-05-01T00:00:00.000Z",
+        "total": 259,
+        "counts": {
+          "testing": 183,
+          "git": 249,
+          "java": 259,
+          "spring": 224,
+          "sql": 219,
+          "postgresql": 163,
+          "kafka": 141,
+          "docker": 186,
+          "kubernetes": 0,
+          "cicd": 165,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-06-01T00:00:00.000Z",
+        "total": 265,
+        "counts": {
+          "testing": 181,
+          "git": 246,
+          "java": 265,
+          "spring": 232,
+          "sql": 228,
+          "postgresql": 178,
+          "kafka": 155,
+          "docker": 206,
+          "kubernetes": 0,
+          "cicd": 190,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-07-01T00:00:00.000Z",
+        "total": 291,
+        "counts": {
+          "testing": 215,
+          "git": 279,
+          "java": 291,
+          "spring": 247,
+          "sql": 245,
+          "postgresql": 199,
+          "kafka": 191,
+          "docker": 214,
+          "kubernetes": 0,
+          "cicd": 205,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-08-01T00:00:00.000Z",
+        "total": 300,
+        "counts": {
+          "testing": 212,
+          "git": 285,
+          "java": 300,
+          "spring": 273,
+          "sql": 260,
+          "postgresql": 209,
+          "kafka": 193,
+          "docker": 230,
+          "kubernetes": 0,
+          "cicd": 221,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-09-01T00:00:00.000Z",
+        "total": 310,
+        "counts": {
+          "testing": 232,
+          "git": 299,
+          "java": 310,
+          "spring": 275,
+          "sql": 265,
+          "postgresql": 205,
+          "kafka": 184,
+          "docker": 244,
+          "kubernetes": 0,
+          "cicd": 204,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-10-01T00:00:00.000Z",
+        "total": 330,
+        "counts": {
+          "testing": 253,
+          "git": 315,
+          "java": 330,
+          "spring": 296,
+          "sql": 278,
+          "postgresql": 227,
+          "kafka": 220,
+          "docker": 263,
+          "kubernetes": 0,
+          "cicd": 241,
+          "architecture": 0
+        }
+      },
+      {
+        "start": "2026-11-01T00:00:00.000Z",
+        "total": 54,
+        "counts": {
+          "testing": 46,
+          "git": 52,
+          "java": 54,
+          "spring": 49,
+          "sql": 50,
+          "postgresql": 38,
+          "kafka": 40,
+          "docker": 43,
+          "kubernetes": 0,
+          "cicd": 42,
+          "architecture": 0
+        }
+      }
+    ],
+    "summary": [
+      {
+        "skill": "testing",
+        "total": 2149,
+        "lastComplete": 253,
+        "previous": 232,
+        "lastCompleteShare": 76.66666666666667,
+        "previousShare": 74.83870967741936,
+        "changePp": 1.827956989247312
+      },
+      {
+        "skill": "git",
+        "total": 2919,
+        "lastComplete": 315,
+        "previous": 299,
+        "lastCompleteShare": 95.45454545454545,
+        "previousShare": 96.45161290322581,
+        "changePp": -0.9970674486803546
+      },
+      {
+        "skill": "java",
+        "total": 3075,
+        "lastComplete": 330,
+        "previous": 310,
+        "lastCompleteShare": 100,
+        "previousShare": 100,
+        "changePp": 0
+      },
+      {
+        "skill": "spring",
+        "total": 2662,
+        "lastComplete": 296,
+        "previous": 275,
+        "lastCompleteShare": 89.6969696969697,
+        "previousShare": 88.70967741935483,
+        "changePp": 0.9872922776148698
+      },
+      {
+        "skill": "sql",
+        "total": 2616,
+        "lastComplete": 278,
+        "previous": 265,
+        "lastCompleteShare": 84.24242424242424,
+        "previousShare": 85.48387096774194,
+        "changePp": -1.2414467253177008
+      },
+      {
+        "skill": "postgresql",
+        "total": 1966,
+        "lastComplete": 227,
+        "previous": 205,
+        "lastCompleteShare": 68.78787878787878,
+        "previousShare": 66.12903225806451,
+        "changePp": 2.6588465298142694
+      },
+      {
+        "skill": "kafka",
+        "total": 1821,
+        "lastComplete": 220,
+        "previous": 184,
+        "lastCompleteShare": 66.66666666666666,
+        "previousShare": 59.354838709677416,
+        "changePp": 7.311827956989241
+      },
+      {
+        "skill": "docker",
+        "total": 2242,
+        "lastComplete": 263,
+        "previous": 244,
+        "lastCompleteShare": 79.6969696969697,
+        "previousShare": 78.70967741935485,
+        "changePp": 0.9872922776148556
+      },
+      {
+        "skill": "kubernetes",
+        "total": 0,
+        "lastComplete": 0,
+        "previous": 0,
+        "lastCompleteShare": 0,
+        "previousShare": 0,
+        "changePp": 0
+      },
+      {
+        "skill": "cicd",
+        "total": 2100,
+        "lastComplete": 241,
+        "previous": 204,
+        "lastCompleteShare": 73.03030303030303,
+        "previousShare": 65.80645161290323,
+        "changePp": 7.2238514173998
+      },
+      {
+        "skill": "architecture",
+        "total": 0,
+        "lastComplete": 0,
+        "previous": 0,
+        "lastCompleteShare": 0,
+        "previousShare": 0,
+        "changePp": 0
+      }
+    ],
+    "generatedAt": "2026-11-05T12:00:00.000Z"
+  },
+  "react": {
+    "period": "month",
+    "directions": [
+      "react"
+    ],
+    "grades": [
+      "senior"
+    ],
+    "skills": [
+      {
+        "id": "javascript",
+        "label": "JavaScript"
+      },
+      {
+        "id": "typescript",
+        "label": "TypeScript"
+      },
+      {
+        "id": "react",
+        "label": "React"
+      },
+      {
+        "id": "css",
+        "label": "HTML / CSS"
+      },
+      {
+        "id": "nextjs",
+        "label": "Next.js"
+      },
+      {
+        "id": "redux",
+        "label": "Redux"
+      },
+      {
+        "id": "testing",
+        "label": "Тестирование"
+      },
+      {
+        "id": "git",
+        "label": "Git"
+      },
+      {
+        "id": "docker",
+        "label": "Docker"
+      },
+      {
+        "id": "kubernetes",
+        "label": "Kubernetes (k8s)"
+      },
+      {
+        "id": "cicd",
+        "label": "CI/CD"
+      },
+      {
+        "id": "architecture",
+        "label": "Проектирование систем"
+      }
+    ],
+    "buckets": [
+      {
+        "start": "2025-12-01T00:00:00.000Z",
+        "total": 63,
+        "counts": {
+          "javascript": 55,
+          "typescript": 48,
+          "react": 63,
+          "css": 60,
+          "nextjs": 31,
+          "redux": 29,
+          "testing": 36,
+          "git": 58,
+          "docker": 49,
+          "kubernetes": 31,
+          "cicd": 31,
+          "architecture": 53
+        }
+      },
+      {
+        "start": "2026-01-01T00:00:00.000Z",
+        "total": 70,
+        "counts": {
+          "javascript": 63,
+          "typescript": 56,
+          "react": 70,
+          "css": 61,
+          "nextjs": 36,
+          "redux": 30,
+          "testing": 45,
+          "git": 62,
+          "docker": 43,
+          "kubernetes": 39,
+          "cicd": 43,
+          "architecture": 52
+        }
+      },
+      {
+        "start": "2026-02-01T00:00:00.000Z",
+        "total": 83,
+        "counts": {
+          "javascript": 75,
+          "typescript": 69,
+          "react": 83,
+          "css": 72,
+          "nextjs": 39,
+          "redux": 31,
+          "testing": 59,
+          "git": 76,
+          "docker": 55,
+          "kubernetes": 46,
+          "cicd": 59,
+          "architecture": 67
+        }
+      },
+      {
+        "start": "2026-03-01T00:00:00.000Z",
+        "total": 80,
+        "counts": {
+          "javascript": 75,
+          "typescript": 66,
+          "react": 80,
+          "css": 68,
+          "nextjs": 47,
+          "redux": 40,
+          "testing": 62,
+          "git": 75,
+          "docker": 63,
+          "kubernetes": 48,
+          "cicd": 50,
+          "architecture": 69
+        }
+      },
+      {
+        "start": "2026-04-01T00:00:00.000Z",
+        "total": 75,
+        "counts": {
+          "javascript": 64,
+          "typescript": 60,
+          "react": 75,
+          "css": 70,
+          "nextjs": 39,
+          "redux": 36,
+          "testing": 49,
+          "git": 71,
+          "docker": 53,
+          "kubernetes": 48,
+          "cicd": 47,
+          "architecture": 64
+        }
+      },
+      {
+        "start": "2026-05-01T00:00:00.000Z",
+        "total": 74,
+        "counts": {
+          "javascript": 70,
+          "typescript": 72,
+          "react": 74,
+          "css": 66,
+          "nextjs": 41,
+          "redux": 36,
+          "testing": 46,
+          "git": 69,
+          "docker": 49,
+          "kubernetes": 39,
+          "cicd": 46,
+          "architecture": 64
+        }
+      },
+      {
+        "start": "2026-06-01T00:00:00.000Z",
+        "total": 102,
+        "counts": {
+          "javascript": 90,
+          "typescript": 91,
+          "react": 102,
+          "css": 93,
+          "nextjs": 60,
+          "redux": 41,
+          "testing": 71,
+          "git": 95,
+          "docker": 76,
+          "kubernetes": 61,
+          "cicd": 74,
+          "architecture": 87
+        }
+      },
+      {
+        "start": "2026-07-01T00:00:00.000Z",
+        "total": 84,
+        "counts": {
+          "javascript": 79,
+          "typescript": 78,
+          "react": 84,
+          "css": 66,
+          "nextjs": 59,
+          "redux": 34,
+          "testing": 58,
+          "git": 79,
+          "docker": 65,
+          "kubernetes": 54,
+          "cicd": 64,
+          "architecture": 77
+        }
+      },
+      {
+        "start": "2026-08-01T00:00:00.000Z",
+        "total": 75,
+        "counts": {
+          "javascript": 71,
+          "typescript": 66,
+          "react": 75,
+          "css": 65,
+          "nextjs": 44,
+          "redux": 25,
+          "testing": 57,
+          "git": 71,
+          "docker": 60,
+          "kubernetes": 44,
+          "cicd": 47,
+          "architecture": 68
+        }
+      },
+      {
+        "start": "2026-09-01T00:00:00.000Z",
+        "total": 89,
+        "counts": {
+          "javascript": 81,
+          "typescript": 81,
+          "react": 89,
+          "css": 79,
+          "nextjs": 48,
+          "redux": 38,
+          "testing": 56,
+          "git": 84,
+          "docker": 68,
+          "kubernetes": 52,
+          "cicd": 63,
+          "architecture": 84
+        }
+      },
+      {
+        "start": "2026-10-01T00:00:00.000Z",
+        "total": 103,
+        "counts": {
+          "javascript": 95,
+          "typescript": 95,
+          "react": 103,
+          "css": 82,
+          "nextjs": 65,
+          "redux": 39,
+          "testing": 79,
+          "git": 99,
+          "docker": 92,
+          "kubernetes": 63,
+          "cicd": 66,
+          "architecture": 97
+        }
+      },
+      {
+        "start": "2026-11-01T00:00:00.000Z",
+        "total": 19,
+        "counts": {
+          "javascript": 18,
+          "typescript": 16,
+          "react": 19,
+          "css": 17,
+          "nextjs": 13,
+          "redux": 9,
+          "testing": 15,
+          "git": 18,
+          "docker": 16,
+          "kubernetes": 11,
+          "cicd": 14,
+          "architecture": 18
+        }
+      }
+    ],
+    "summary": [
+      {
+        "skill": "javascript",
+        "total": 836,
+        "lastComplete": 95,
+        "previous": 81,
+        "lastCompleteShare": 92.23300970873787,
+        "previousShare": 91.01123595505618,
+        "changePp": 1.2217737536816884
+      },
+      {
+        "skill": "typescript",
+        "total": 798,
+        "lastComplete": 95,
+        "previous": 81,
+        "lastCompleteShare": 92.23300970873787,
+        "previousShare": 91.01123595505618,
+        "changePp": 1.2217737536816884
+      },
+      {
+        "skill": "react",
+        "total": 917,
+        "lastComplete": 103,
+        "previous": 89,
+        "lastCompleteShare": 100,
+        "previousShare": 100,
+        "changePp": 0
+      },
+      {
+        "skill": "css",
+        "total": 799,
+        "lastComplete": 82,
+        "previous": 79,
+        "lastCompleteShare": 79.6116504854369,
+        "previousShare": 88.76404494382022,
+        "changePp": -9.152394458383327
+      },
+      {
+        "skill": "nextjs",
+        "total": 522,
+        "lastComplete": 65,
+        "previous": 48,
+        "lastCompleteShare": 63.10679611650486,
+        "previousShare": 53.93258426966292,
+        "changePp": 9.174211846841942
+      },
+      {
+        "skill": "redux",
+        "total": 388,
+        "lastComplete": 39,
+        "previous": 38,
+        "lastCompleteShare": 37.86407766990291,
+        "previousShare": 42.69662921348314,
+        "changePp": -4.83255154358023
+      },
+      {
+        "skill": "testing",
+        "total": 633,
+        "lastComplete": 79,
+        "previous": 56,
+        "lastCompleteShare": 76.69902912621359,
+        "previousShare": 62.92134831460674,
+        "changePp": 13.77768081160685
+      },
+      {
+        "skill": "git",
+        "total": 857,
+        "lastComplete": 99,
+        "previous": 84,
+        "lastCompleteShare": 96.11650485436894,
+        "previousShare": 94.3820224719101,
+        "changePp": 1.734482382458836
+      },
+      {
+        "skill": "docker",
+        "total": 689,
+        "lastComplete": 92,
+        "previous": 68,
+        "lastCompleteShare": 89.32038834951457,
+        "previousShare": 76.40449438202246,
+        "changePp": 12.91589396749211
+      },
+      {
+        "skill": "kubernetes",
+        "total": 536,
+        "lastComplete": 63,
+        "previous": 52,
+        "lastCompleteShare": 61.165048543689316,
+        "previousShare": 58.42696629213483,
+        "changePp": 2.738082251554488
+      },
+      {
+        "skill": "cicd",
+        "total": 604,
+        "lastComplete": 66,
+        "previous": 63,
+        "lastCompleteShare": 64.07766990291263,
+        "previousShare": 70.78651685393258,
+        "changePp": -6.70884695101995
+      },
+      {
+        "skill": "architecture",
+        "total": 800,
+        "lastComplete": 97,
+        "previous": 84,
+        "lastCompleteShare": 94.1747572815534,
+        "previousShare": 94.3820224719101,
+        "changePp": -0.20726519035670776
+      }
+    ],
+    "generatedAt": "2026-11-05T12:00:00.000Z"
+  }
+}

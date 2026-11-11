@@ -17,9 +17,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getDirection } from "@/shared/config"
+import { getDirection, GRADE_IDS, GRADES } from "@/shared/config"
 import { formatDateTime } from "@/shared/lib/date"
-import type { DirectionId, Vacancy } from "@/shared/types"
+import { getSkillLabel } from "@/shared/skills"
+import type { DirectionId, Grade, Vacancy } from "@/shared/types"
 
 import { useLatestVacancies } from "./api"
 
@@ -33,8 +34,8 @@ function formatSalary({ salaryFrom, salaryTo }: Vacancy) {
   return "—"
 }
 
-export function LatestVacancies({ directions }: { directions: DirectionId[] }) {
-  const { data, isPending, error } = useLatestVacancies(directions)
+export function LatestVacancies({ directions, grades = GRADE_IDS }: { directions: DirectionId[]; grades?: Grade[] }) {
+  const { data, isPending, error } = useLatestVacancies(directions, grades)
 
   return (
     <Card>
@@ -60,6 +61,7 @@ export function LatestVacancies({ directions }: { directions: DirectionId[] }) {
             <TableHeader>
               <TableRow>
                 <TableHead>Вакансия</TableHead>
+                <TableHead>Грейд и стек</TableHead>
                 <TableHead>Компания</TableHead>
                 <TableHead>Город</TableHead>
                 <TableHead className="text-right">Зарплата</TableHead>
@@ -68,6 +70,9 @@ export function LatestVacancies({ directions }: { directions: DirectionId[] }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {data.items.length === 0 && (
+                <TableRow><TableCell colSpan={7} className="py-8 text-center text-muted-foreground">Нет вакансий для выбранных фильтров</TableCell></TableRow>
+              )}
               {data.items.map((v) => (
                 <TableRow key={v.id}>
                   <TableCell className="font-medium">
@@ -77,6 +82,12 @@ export function LatestVacancies({ directions }: { directions: DirectionId[] }) {
                         style={{ backgroundColor: getDirection(v.direction).color }}
                       />
                       {v.title}
+                    </div>
+                  </TableCell>
+                  <TableCell className="min-w-56 max-w-80 whitespace-normal">
+                    <Badge variant="outline" className="mb-2">{GRADES.find((g) => g.id === v.grade)?.label}</Badge>
+                    <div className="flex flex-wrap gap-1">
+                      {v.skills.map((id) => <Badge key={id} variant="secondary">{getSkillLabel(id)}</Badge>)}
                     </div>
                   </TableCell>
                   <TableCell>{v.company}</TableCell>

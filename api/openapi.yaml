@@ -1,0 +1,515 @@
+openapi: 3.1.0
+info:
+  title: SPO API
+  version: 0.1.0
+  description: |
+    Единый контракт между фронтендом и сервисами SPO.
+    Источник истины: фронт генерирует типы из этого файла (`bun run api:types`),
+    бэкенд обязан соответствовать описанным здесь путям и схемам.
+
+    Пути сгруппированы по сервисам:
+      * `/api/auth/**`, `/api/admin/**` — auth-service;
+      * `/api/stats/**`, `/api/vacancies/**`, `/api/directions` — search-service.
+
+    Авторизация: access-токен (JWT, RS256, TTL 15 минут) передаётся в заголовке
+    `Authorization: Bearer`. Refresh-токен живёт в httpOnly cookie `spo_refresh`
+    с путём `/api/auth` и в теле ответов не передаётся.
+
+servers:
+  - url: /api
+    description: Через rewrite в Next.js — тот же origin, что и фронт
+
+tags:
+  - name: auth
+  - name: admin
+  - name: stats
+
+paths:
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Регистрация и вход
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RegisterRequest' }
+      responses:
+        '201':
+          description: Создан пользователь, выдана сессия
+          headers:
+            Set-Cookie:
+              schema: { type: string }
+              description: spo_refresh=...; HttpOnly; SameSite=Lax; Path=/
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '409':
+          description: Email уже занят
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiError' }
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Вход
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LoginRequest' }
+      responses:
+        '200':
+          description: Сессия выдана
+          headers:
+            Set-Cookie:
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /auth/refresh:
+    post:
+      tags: [auth]
+      summary: Обновление access-токена по refresh-cookie
+      description: Refresh ротируется — предыдущий токен гасится. Повторное использование гасит все сессии пользователя.
+      security: []
+      responses:
+        '200':
+          description: Новый access-токен и новая refresh-cookie
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: Выход
+      security: []
+      responses:
+        '204':
+          description: Refresh погашен, cookie очищена
+
+  /auth/me:
+    get:
+      tags: [auth]
+      summary: Текущий пользователь с ролями и правами
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /admin/users:
+    get:
+      tags: [admin]
+      summary: Список пользователей
+      description: Требует право USER_MANAGE.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/User' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /admin/users/{id}/roles:
+    put:
+      tags: [admin]
+      summary: Замена набора ролей пользователя
+      description: Требует право ROLE_MANAGE. Активные сессии пользователя гасятся.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [roles]
+              properties:
+                roles:
+                  type: array
+                  minItems: 1
+                  items: { $ref: '#/components/schemas/RoleCode' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /directions:
+    get:
+      tags: [stats]
+      summary: Справочник направлений
+      description: |
+        Список направлений приходит с бэкенда, а не хардкодится на фронте:
+        на 2-м месяце их 10, на 3-м — полный спектр.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Direction' }
+
+  /stats/demand:
+    get:
+      tags: [stats]
+      summary: Динамика количества вакансий по направлениям
+      description: Требует право STATS_VIEW.
+      parameters:
+        - name: period
+          in: query
+          required: true
+          schema: { $ref: '#/components/schemas/Period' }
+        - name: directions
+          in: query
+          required: true
+          description: Коды направлений через запятую
+          schema: { type: string }
+          example: java,react
+        - name: from
+          in: query
+          description: Начало диапазона (ISO-дата). Без него берётся окно по умолчанию для периода.
+          schema: { type: string, format: date }
+        - name: to
+          in: query
+          schema: { type: string, format: date }
+        - name: majorOnly
+          in: query
+          description: Только крупные компании
+          schema: { type: boolean, default: false }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DemandResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /vacancies/skills:
+    get:
+      tags: [stats]
+      summary: История требований к навыкам по направлениям и грейдам
+      description: |
+        Требует STATS_VIEW. Учитываются требования вакансии на дату публикации.
+        Доля навыка — число вакансий с навыком / все вакансии выбранных направлений и грейдов.
+        Вакансия учитывается один раз на навык. Пустой период имеет долю null, а не 0.
+        summary сравнивает два последних завершённых периода; текущий есть только в buckets.
+        Окно: day — 30 дней, week — 12 недель, month — 12 месяцев, year — 3 года, включая текущий период.
+        Начала периодов в UTC, неделя начинается в понедельник.
+      parameters:
+        - name: period
+          in: query
+          schema:
+            allOf: [{ $ref: '#/components/schemas/Period' }]
+            default: month
+        - name: directions
+          in: query
+          description: Коды через запятую (react,java), по умолчанию все. Неизвестные и пустые значения — 400.
+          schema: { type: string }
+        - name: grades
+          in: query
+          description: Грейды через запятую (junior,middle,senior,lead), по умолчанию все. Неизвестные и пустые значения — 400.
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SkillsResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /vacancies:
+    get:
+      tags: [stats]
+      summary: Последние вакансии
+      parameters:
+        - name: directions
+          in: query
+          schema: { type: string }
+        - name: grades
+          in: query
+          description: Грейды через запятую; по умолчанию все. Фильтр совпадает с радаром навыков.
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: majorOnly
+          in: query
+          schema: { type: boolean, default: false }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VacanciesResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    BadRequest:
+      description: Некорректный запрос
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    Unauthorized:
+      description: Не авторизован
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    Forbidden:
+      description: Недостаточно прав
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    NotFound:
+      description: Не найдено
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+
+  schemas:
+    ApiError:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string }
+
+    RoleCode:
+      type: string
+      enum: [USER, ANALYST, ADMIN]
+
+    Permission:
+      type: string
+      enum:
+        - STATS_VIEW
+        - FILTER_SAVE
+        - COMPANY_WATCH_VIEW
+        - COMPANY_WATCH_EDIT
+        - COLLECT_RUN
+        - REPORT_EXPORT
+        - DICTIONARY_EDIT
+        - USER_MANAGE
+        - ROLE_MANAGE
+        - PARSER_SCHEDULE_MANAGE
+        - AUDIT_VIEW
+
+    User:
+      type: object
+      required: [id, email, name, active, roles, permissions]
+      properties:
+        id: { type: string, format: uuid }
+        email: { type: string, format: email }
+        name: { type: string }
+        active: { type: boolean }
+        roles:
+          type: array
+          items: { $ref: '#/components/schemas/RoleCode' }
+        permissions:
+          type: array
+          items: { $ref: '#/components/schemas/Permission' }
+
+    Session:
+      type: object
+      required: [accessToken, expiresIn, user]
+      properties:
+        accessToken:
+          type: string
+          description: JWT RS256. Хранится в памяти вкладки, не в localStorage.
+        expiresIn:
+          type: integer
+          description: Время жизни access-токена в секундах
+        user: { $ref: '#/components/schemas/User' }
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string }
+
+    RegisterRequest:
+      type: object
+      required: [email, password, name]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8 }
+        name: { type: string, maxLength: 120 }
+
+    Period:
+      type: string
+      enum: [day, week, month, year]
+
+    Direction:
+      type: object
+      required: [code, name]
+      properties:
+        code: { type: string, example: java }
+        name: { type: string, example: Java }
+        color:
+          type: string
+          description: Необязательный цвет для графика; если пустой, фронт берёт из своей палитры
+
+    DemandBucket:
+      type: object
+      required: [start, counts]
+      properties:
+        start: { type: string, format: date-time }
+        counts:
+          type: object
+          additionalProperties: { type: integer }
+          description: Ключ — код направления
+
+    DirectionSummary:
+      type: object
+      required: [direction, total, lastComplete, previous]
+      properties:
+        direction: { type: string }
+        total: { type: integer }
+        lastComplete: { type: integer }
+        previous: { type: integer }
+        changePct:
+          type: [number, 'null']
+
+    DemandResponse:
+      type: object
+      required: [period, directions, buckets, summary, generatedAt]
+      properties:
+        period: { $ref: '#/components/schemas/Period' }
+        directions:
+          type: array
+          items: { type: string }
+        buckets:
+          type: array
+          items: { $ref: '#/components/schemas/DemandBucket' }
+        summary:
+          type: array
+          items: { $ref: '#/components/schemas/DirectionSummary' }
+        generatedAt: { type: string, format: date-time }
+
+    Grade:
+      type: string
+      enum: [junior, middle, senior, lead]
+
+    Skill:
+      type: object
+      required: [id, label]
+      properties:
+        id: { type: string, example: kubernetes }
+        label: { type: string, example: 'Kubernetes (k8s)' }
+
+    SkillBucket:
+      type: object
+      required: [start, total, counts]
+      properties:
+        start: { type: string, format: date-time }
+        total: { type: integer, minimum: 0 }
+        counts:
+          type: object
+          description: Число вакансий, требующих навык; ключ — Skill.id.
+          additionalProperties: { type: integer, minimum: 0 }
+
+    SkillSummary:
+      type: object
+      required: [skill, total, lastComplete, previous, lastCompleteShare, previousShare, changePp]
+      properties:
+        skill: { type: string }
+        total: { type: integer, minimum: 0 }
+        lastComplete: { type: integer, minimum: 0 }
+        previous: { type: integer, minimum: 0 }
+        lastCompleteShare: { type: [number, 'null'], minimum: 0, maximum: 100 }
+        previousShare: { type: [number, 'null'], minimum: 0, maximum: 100 }
+        changePp:
+          type: [number, 'null']
+          description: lastCompleteShare - previousShare, в процентных пунктах. null при отсутствии любой из выборок.
+
+    SkillsResponse:
+      type: object
+      required: [period, directions, grades, skills, buckets, summary, generatedAt]
+      properties:
+        period: { $ref: '#/components/schemas/Period' }
+        directions:
+          type: array
+          items: { type: string }
+        grades:
+          type: array
+          items: { $ref: '#/components/schemas/Grade' }
+        skills:
+          type: array
+          items: { $ref: '#/components/schemas/Skill' }
+        buckets:
+          type: array
+          items: { $ref: '#/components/schemas/SkillBucket' }
+        summary:
+          type: array
+          items: { $ref: '#/components/schemas/SkillSummary' }
+        generatedAt: { type: string, format: date-time }
+
+    Vacancy:
+      type: object
+      required: [id, title, company, direction, grade, skills, city, url, publishedAt]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        company: { type: string }
+        companyMajor:
+          type: boolean
+          description: Признак крупной компании (employers.is_major)
+        direction: { type: string }
+        grade: { $ref: '#/components/schemas/Grade' }
+        skills:
+          type: array
+          uniqueItems: true
+          description: Skill.id — требования, зафиксированные на дату публикации.
+          items: { type: string }
+        city: { type: string }
+        salaryFrom: { type: [integer, 'null'] }
+        salaryTo: { type: [integer, 'null'] }
+        currency: { type: [string, 'null'] }
+        url: { type: string, format: uri }
+        publishedAt: { type: string, format: date-time }
+
+    VacanciesResponse:
+      type: object
+      required: [items, total]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Vacancy' }
+        total: { type: integer }
+
+security:
+  - bearerAuth: []

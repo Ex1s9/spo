@@ -8,11 +8,22 @@ type MockAccount = User & { password: string }
 export const DEMO_CREDENTIALS = { email: "demo@spo.dev", password: "demo1234" }
 
 const ACCOUNTS: MockAccount[] = [
-  { id: "u1", name: "Demo User", ...DEMO_CREDENTIALS },
+  {
+    id: "u1",
+    name: "Demo User",
+    active: true,
+    roles: ["ADMIN"],
+    permissions: [
+      "STATS_VIEW", "FILTER_SAVE", "COMPANY_WATCH_VIEW", "COMPANY_WATCH_EDIT",
+      "COLLECT_RUN", "REPORT_EXPORT", "DICTIONARY_EDIT", "USER_MANAGE",
+      "ROLE_MANAGE", "PARSER_SCHEDULE_MANAGE", "AUDIT_VIEW",
+    ],
+    ...DEMO_CREDENTIALS,
+  },
 ]
 
-function toUser({ id, email, name }: MockAccount): User {
-  return { id, email, name }
+function toUser({ password: _password, ...user }: MockAccount): User {
+  return user
 }
 
 export function authenticate(email: string, password: string): User | null {

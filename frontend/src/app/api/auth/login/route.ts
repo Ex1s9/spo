@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Неверный email или пароль" }, { status: 401 })
   }
 
-  const response = NextResponse.json(user)
+  const response = NextResponse.json({ accessToken: "mock", expiresIn: 900, user })
   response.cookies.set(SESSION_COOKIE, createToken(user), {
     httpOnly: true,
     sameSite: "lax",

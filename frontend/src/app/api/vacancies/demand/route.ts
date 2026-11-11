@@ -5,8 +5,13 @@ import { getDemand } from "@/mocks/vacancies"
 import { DIRECTION_IDS, isDirectionId, isPeriod } from "@/shared/config"
 
 export async function GET(request: NextRequest) {
-  if (!getUserFromRequest(request)) {
+  const user = getUserFromRequest(request)
+  if (!user) {
     return NextResponse.json({ message: "Не авторизован" }, { status: 401 })
+  }
+
+  if (!user.permissions.includes("STATS_VIEW")) {
+    return NextResponse.json({ message: "Недостаточно прав" }, { status: 403 })
   }
 
   const params = request.nextUrl.searchParams

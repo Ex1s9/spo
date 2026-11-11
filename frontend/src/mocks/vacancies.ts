@@ -7,7 +7,9 @@ import type {
   DirectionSummary,
   Period,
   Vacancy,
+  Grade,
 } from "@/shared/types"
+import { generateSkills } from "./skills"
 
 const DAY_MS = 24 * 60 * 60 * 1000
 const HISTORY_DAYS = 365 * 3
@@ -21,8 +23,6 @@ function mulberry32(seed: number) {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
 }
-
-type Grade = "junior" | "middle" | "senior" | "lead"
 
 const SALARY_RANGE_K: Record<Grade, [number, number]> = {
   junior: [60, 130],
@@ -135,6 +135,8 @@ function generateVacancies(): Vacancy[] {
           title,
           company: pick(rand, COMPANIES),
           direction,
+          grade,
+          skills: generateSkills(direction, grade, daysAgo, seq),
           city: pick(rand, CITIES),
           salaryFrom,
           salaryTo,

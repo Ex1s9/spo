@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { UserMenu } from "@/features/auth/user-menu";
+import { DashboardNav } from "@/features/demand/dashboard-nav";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -16,7 +17,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <UserMenu />
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-4 py-8">
+        <DashboardNav />
+        {children}
+      </main>
     </div>
   );
 }
