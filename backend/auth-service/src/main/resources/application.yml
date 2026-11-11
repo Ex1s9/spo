@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5434/spo}
+    username: ${DB_USER:spo}
+    password: ${DB_PASSWORD:spo}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: auth
+  flyway:
+    schemas: auth
+    default-schema: auth
+    locations: classpath:db/migration
+
+spo:
+  jwt:
+    issuer: spo-auth
+    key-id: spo-auth-1
+    access-ttl: PT15M
+    refresh-ttl: P30D
+    # Ключи задаются в проде. Если не заданы — на старте генерируется временная пара (только для разработки).
+    private-key: ${JWT_PRIVATE_KEY:}
+    public-key: ${JWT_PUBLIC_KEY:}
+  cookie:
+    name: spo_refresh
+    path: /
+    secure: ${COOKIE_SECURE:false}
+    same-site: Lax
+  bootstrap-admin:
+    enabled: ${BOOTSTRAP_ADMIN:true}
+    email: admin@spo.dev
+    password: ${BOOTSTRAP_ADMIN_PASSWORD:admin1234}
+    name: Администратор
+
+logging:
+  level:
+    ru.spo.auth: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
